@@ -14,7 +14,7 @@ const App = () => {
 	// Monsters downloading start
 	useEffect(() => {
 		console.log("Users");
-		fetch("http://jsonplaceholder.typicode.com/users")
+		fetch("/api/users")
 			.then((response) => response.json())
 			.then((Users) => {
 				// console.log(Users);
