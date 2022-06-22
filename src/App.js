@@ -14,20 +14,17 @@ const App = () => {
 	// Monsters downloading start
 	useEffect(() => {
 		(async () => {
-			console.log("Users");
-			await fetch("/api/users")
+			// console.log("Users");
+			await fetch("/api/")
 				.then((response) => response.json())
-				.then((Users) => {
-					console.log(Users);
-					return setUsers(Users);
-				});
+				.then((Users) => setUsers(Users));
 		})();
 	}, []);
 
 	// console.log("render", users);
 
 	useEffect(() => {
-		console.log("Filter");
+		// console.log("Filter");
 		const temp = users.filter((user) => {
 			// console.log(searchField, user);
 			return user.name.toLowerCase().includes(searchField.toLowerCase());
