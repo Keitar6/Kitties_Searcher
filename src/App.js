@@ -6,20 +6,22 @@ import Search from "./Component/search-box/SearchList.component";
 
 const App = () => {
 	const [users, setUsers] = useState([]);
-	const [title, setTitle] = useState('Kitties Rolodex');
+	const [title, setTitle] = useState("Kitties Rolodex");
 
 	const [usersBufor, setUsersBufor] = useState(users);
 	const [searchField, setSearchField] = useState("");
 
 	// Monsters downloading start
 	useEffect(() => {
-		console.log("Users");
-		fetch("/api/users")
-			.then((response) => response.json())
-			.then((Users) => {
-				// console.log(Users);
-				return setUsers(Users);
-			});
+		(async () => {
+			console.log("Users");
+			await fetch("/api/users")
+				.then((response) => response.json())
+				.then((Users) => {
+					console.log(Users);
+					return setUsers(Users);
+				});
+		})();
 	}, []);
 
 	// console.log("render", users);
