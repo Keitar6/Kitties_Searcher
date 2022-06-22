@@ -15,7 +15,7 @@ const App = () => {
 	useEffect(() => {
 		(async () => {
 			// console.log("Users");
-			await fetch("/api/")
+			await fetch("/users/")
 				.then((response) => response.json())
 				.then((Users) => setUsers(Users));
 		})();
