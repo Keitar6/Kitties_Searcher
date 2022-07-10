@@ -1,11 +1,18 @@
 import "./App.css";
 import "./Component/search-box/searchList.styles.css";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Users from "./Component/monsters-list/Users.component";
 import Search from "./Component/search-box/SearchList.component";
+import { getUsers } from "./utils/data.utils";
+
+export type Monster = {
+	id: string;
+	name: string;
+	email: string;
+};
 
 const App = () => {
-	const [users, setUsers] = useState([]);
+	const [users, setUsers] = useState<Monster[]>([]);
 	const [title, setTitle] = useState("Kitties Rolodex");
 
 	const [usersBufor, setUsersBufor] = useState(users);
@@ -15,13 +22,10 @@ const App = () => {
 	useEffect(() => {
 		(async () => {
 			// console.log("Users");
-			await fetch("/users/")
-				.then((response) => response.json())
-				.then((Users) => setUsers(Users));
+			const users = await getUsers<Monster[]>("users/");
+			setUsers(users);
 		})();
 	}, []);
-
-	// console.log("render", users);
 
 	useEffect(() => {
 		// console.log("Filter");
@@ -32,18 +36,16 @@ const App = () => {
 		setUsersBufor(temp);
 	}, [searchField, users]);
 
-	// ChangeHandler users function start
-
-	const onSearchChangeHandler = (event) => {
+	const onSearchChangeHandler = (
+		event: ChangeEvent<HTMLInputElement>
+	): void => {
 		setSearchField(event.target.value);
 	};
 
-	const onTitleChangeHandler = (event) => {
+	const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
 		setTitle(event.target.value);
 	};
-	// ChangeHandler users function end
 
-	// console.log(usersBufor);
 	return (
 		<div className='App'>
 			<header>

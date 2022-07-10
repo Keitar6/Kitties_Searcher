@@ -1,12 +1,18 @@
 import UserCard from "./card/UsersCard.component";
 import "./users-card.styles.css";
 
-const Users = ({users}) => {
+import { Monster } from "../../App";
+
+type CardListProps = {
+	users: Monster[];
+};
+
+const Users = ({ users }: CardListProps) => {
 	// console.log(users);
 	return (
 		<div className='card-list'>
 			{users.map((Monster) => {
-				return <UserCard user={Monster} />;
+				return <UserCard key={Monster.id} user={Monster} />;
 			})}
 		</div>
 	);

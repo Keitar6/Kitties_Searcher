@@ -1,4 +1,10 @@
-const UserCard = ({ user }) => {
+import { Monster } from "../../../App";
+
+type CardProps = {
+	user: Monster;
+};
+
+const UserCard = ({ user }: CardProps) => {
 	// console.log(user);
 	const { id, name, email } = user;
 	return (
